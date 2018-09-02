@@ -1,0 +1,19 @@
+# This function I construct to calculates the confidence intervals for a proportion of two sampling populations. 
+# The visiting rate of each sample with a 95% significance level. In this example, the visiting rate for the first sample 
+# is significantly higher than the visiting rate for the second .
+
+sample1 = c(.28, 5000) # sample 1 with 28% and 5000 people
+sample2 = c(.23, 7400) # sample 2 with 23% but 7400 people
+
+abtestfunc <- function(ad1, ad2){
+  sqRs1 = sqrt( ad1[1] * (1-ad1[1]) / ad1[2] )
+  sqRs2 = sqrt( ad2[1] * (1-ad2[1]) / ad2[2] )
+  minmax1 = c((ad1[1] - 1.96*sqRs1) * 100, (ad1[1] + 1.96*sqRs1) * 100)
+  minmax2 = c((ad2[1] - 1.96*sqRs2) * 100, (ad2[1] + 1.96*sqRs2) * 100)
+  print( round(minmax1,2) )
+  print( round(minmax2,2) )
+}
+
+abtestfunc(sample1, sample2)
+>[1] 26.76 29.24
+>[1] 22.04 23.96
