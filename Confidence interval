@@ -1,5 +1,13 @@
-sample1 = c(.28, 5000) # sample 1 with 18% and 5000 people
-sample2 = c(.23, 7400) # sample 2 with 15% but 5400 people
+# In Statistics A/B testing is a method when we are comparing the effectiveness of several different variations of samples.
+
+# We can use Confidence Interval as one way to examine this problem by calculating confidence intervals of the conversion rates for each variation of the samples. 
+
+# This function I construct to calculates the confidence intervals for a proportion of two sampling populations. 
+# The visiting/conversion rate of each sample with a 95% significance level. In this example, the visiting rate for the first sample 
+# is significantly higher than the visiting rate for the second .
+
+sample1 = c(.28, 5000) # sample 1 with 28% and 5000 people
+sample2 = c(.23, 7400) # sample 2 with 23% but 7400 people
 
 abtestfunc <- function(ad1, ad2){
   sqRs1 = sqrt( ad1[1] * (1-ad1[1]) / ad1[2] )
@@ -11,3 +19,5 @@ abtestfunc <- function(ad1, ad2){
 }
 
 abtestfunc(sample1, sample2)
+>[1] 26.76 29.24
+>[1] 22.04 23.96
