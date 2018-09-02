@@ -1,5 +1,9 @@
+# In Statistics A/B testing is a method when we are comparing the effectiveness of several different variations of samples.
+
+# We can use Confidence Interval as one way to examine this problem by calculating confidence intervals of the conversion rates for each variation of the samples. 
+
 # This function I construct to calculates the confidence intervals for a proportion of two sampling populations. 
-# The visiting rate of each sample with a 95% significance level. In this example, the visiting rate for the first sample 
+# The visiting/conversion rate of each sample with a 95% significance level. In this example, the visiting rate for the first sample 
 # is significantly higher than the visiting rate for the second .
 
 sample1 = c(.28, 5000) # sample 1 with 28% and 5000 people
