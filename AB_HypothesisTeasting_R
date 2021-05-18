@@ -1,0 +1,231 @@
+
+
+> # sanity chek for A/B testing
+> true_p = 0.5
+> t_cont = 15348
+> t_exp = 15312
+> sd = sqrt((0.5*0.5)/(t_cont+t_exp))
+> sd
+[1] 0.002855512
+> m = sd*1.96 ; m
+[1] 0.005596803
+> #CI = (true_p-m,true_p+m)
+> CI <-  c(true_p-m, true_p+m)
+> print(CI )
+[1] 0.4944032 0.5055968
+> pool_p = (t_cont)/(t_exp+t_cont)
+> pool_p
+[1] 0.5005871
+> #Using R calculate the 95% Confidence Interval of the variant 𝑉1 which has 150 Clicks and 900 Impressions
+> CI<-prop.test(x=150,n=900, correct = FALSE, conf.level = 0.95)
+> CI$conf.int
+[1] 0.1437461 0.1924207
+attr(,"conf.level")
+[1] 0.95
+> # Using R test if the actual 𝑝 of the variant 𝑉1 could be considered as 0.17 and then test again for 0.20
+> #Hypothesis Testing for p=0.17
+> t1<-prop.test(x=150,n=900, p=0.17, alternative = c("two.sided"), conf.level = 0.95, correct = FALSE)
+> t1
+
+	1-sample proportions test without continuity correction
+
+data:  150 out of 900, null probability 0.17
+X-squared = 0.070872, df = 1, p-value = 0.7901
+alternative hypothesis: true p is not equal to 0.17
+95 percent confidence interval:
+ 0.1437461 0.1924207
+sample estimates:
+        p 
+0.1666667 
+
+> #Hypothesis Testing for p=0.20
+> t2<-prop.test(x=150,n=900, p=0.20, correct = FALSE)
+> t2
+
+	1-sample proportions test without continuity correction
+
+data:  150 out of 900, null probability 0.2
+X-squared = 6.25, df = 1, p-value = 0.01242
+alternative hypothesis: true p is not equal to 0.2
+95 percent confidence interval:
+ 0.1437461 0.1924207
+sample estimates:
+        p 
+0.1666667 
+
+> #Hypothesis Testing of Two Variants (AB Testing)
+> # Using R calculate compare the variant 𝑉1 which has 120 Clicks and 800 Impressions with variant 𝑉2 which has 100 Clicks and 700 Impressions
+> # define a vector of the responses
+> x<-c(120,100)
+> # define a vector of the impressions
+> n<-c(800,700)
+> test1<-prop.test(x,n, correct = FALSE)
+> test1
+
+	2-sample test for equality of proportions without continuity correction
+
+data:  x out of n
+X-squared = 0.15219, df = 1, p-value = 0.6964
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.02869299  0.04297870
+sample estimates:
+   prop 1    prop 2 
+0.1500000 0.1428571 
+
+> # Hypothesis Testing of k Variants (ABn Testing) Chi-Square Test
+> #Assume that we have 8 variants with the following clicks (80,85,90,95,100,105,110,115) 
+> #respectively and all of them have 1000 impressions. Using R determine if all these variants can be considered equivalent.
+> x<-seq(from=80, by=5, length.out=8)
+> x  # [1]  80  85  90  95 100 105 110 115
+[1]  80  85  90  95 100 105 110 115
+> n<-rep(1000,8)
+> n  # [1] 1000 1000 1000 1000 1000 1000 1000 1000
+[1] 1000 1000 1000 1000 1000 1000 1000 1000
+> chisqtest<-prop.test(x,n, conf.level = 0.95)
+> chisqtest
+
+	8-sample test for equality of proportions without continuity correction
+
+data:  x out of n
+X-squared = 11.933, df = 7, p-value = 0.1028
+alternative hypothesis: two.sided
+sample estimates:
+prop 1 prop 2 prop 3 prop 4 prop 5 prop 6 prop 7 prop 8 
+ 0.080  0.085  0.090  0.095  0.100  0.105  0.110  0.115 
+
+> #Multiple Pairwise Comparisons Without P-Value Adjustments
+> x<-seq(from=80, by=5, length.out=8)
+> n<-rep(1000,8)
+> ppt<-pairwise.prop.test(x, n, p.adjust.method = "none")
+> ppt
+
+	Pairwise comparisons using Pairwise comparison of proportions 
+
+data:  x out of n 
+
+  1     2     3     4     5     6     7    
+2 0.745 -     -     -     -     -     -    
+3 0.471 0.752 -     -     -     -     -    
+4 0.268 0.482 0.758 -     -     -     -    
+5 0.138 0.280 0.492 0.763 -     -     -    
+6 0.064 0.147 0.291 0.502 0.768 -     -    
+7 0.027 0.070 0.157 0.302 0.512 0.773 -    
+8 0.010 0.031 0.077 0.166 0.312 0.520 0.777
+
+P value adjustment method: none 
+> #Multiple Pairwise Comparisons With P-Value Adjustments  
+> #{“holm”, “hochberg”, “hommel”, “bonferroni”, “BH”, “BY”, “fdr”, “none”}
+> #False Discovery Rate as method of adjustment
+> x<-seq(from=80, by=5, length.out=8)
+> n<-rep(1000,8)
+> ppt<-pairwise.prop.test(x, n, p.adjust.method = "fdr")
+> ppt
+
+	Pairwise comparisons using Pairwise comparison of proportions 
+
+data:  x out of n 
+
+  1    2    3    4    5    6    7   
+2 0.78 -    -    -    -    -    -   
+3 0.69 0.78 -    -    -    -    -   
+4 0.58 0.69 0.78 -    -    -    -   
+5 0.46 0.58 0.69 0.78 -    -    -   
+6 0.36 0.46 0.58 0.69 0.78 -    -   
+7 0.29 0.36 0.46 0.58 0.69 0.78 -   
+8 0.29 0.29 0.36 0.46 0.58 0.69 0.78
+
+P value adjustment method: fdr 
+> #Multiple Pairwise Comparisons of Control Variant With P-Value Adjustments
+> x<-seq(from=80, by=5, length.out=8)
+> n<-rep(1000,8)
+> ppt<-pairwise.prop.test(x, n, p.adjust.method = "none")
+> # this vector is the p-values of variant 1 versus the rest 7 variants without adjustments
+> pvalue_vector<-ppt$p.value[,1]
+> pvalue_vector
+         2          3          4          5          6          7          8 
+0.74510651 0.47052922 0.26791381 0.13766142 0.06398843 0.02699772 0.01037907 
+> # now apply the pvalue adjustment to the vector of pvalues
+> p.adjust(pvalue_vector, method = "fdr")
+         2          3          4          5          6          7          8 
+0.74510651 0.54895076 0.37507933 0.24090748 0.14930633 0.09449203 0.07265352 
+> library(multcomp)
+Loading required package: mvtnorm
+Loading required package: survival
+Loading required package: TH.data
+Loading required package: MASS
+
+Attaching package: ‘TH.data’
+
+The following object is masked from ‘package:MASS’:
+
+    geyser
+
+> dataset<-data.frame(x=seq(from=80, by=5, length.out=8), n=rep(1000,8), ID=factor(c(1:8)))
+> dataset
+    x    n ID
+1  80 1000  1
+2  85 1000  2
+3  90 1000  3
+4  95 1000  4
+5 100 1000  5
+6 105 1000  6
+7 110 1000  7
+8 115 1000  8
+> model1<- glm(formula = cbind(x, n-x) ~ ID, family = binomial(link = "logit"), data=dataset)
+> model1
+
+Call:  glm(formula = cbind(x, n - x) ~ ID, family = binomial(link = "logit"), 
+    data = dataset)
+
+Coefficients:
+(Intercept)          ID2          ID3          ID4          ID5          ID6          ID7  
+   -2.44235      0.06607      0.12871      0.18829      0.24512      0.29948      0.35161  
+        ID8  
+    0.40169  
+
+Degrees of Freedom: 7 Total (i.e. Null);  0 Residual
+Null Deviance:	    11.98 
+Residual Deviance: 7.749e-13 	AIC: 66.48
+> # Tukey multiple comparisons
+> summary(glht(model1, mcp(ID="Tukey")))
+
+	 Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: glm(formula = cbind(x, n - x) ~ ID, family = binomial(link = "logit"), 
+    data = dataset)
+
+Linear Hypotheses:
+           Estimate Std. Error z value Pr(>|z|)
+2 - 1 == 0  0.06607    0.16262   0.406    1.000
+3 - 1 == 0  0.12871    0.16061   0.801    0.993
+4 - 1 == 0  0.18829    0.15880   1.186    0.936
+5 - 1 == 0  0.24512    0.15716   1.560    0.774
+6 - 1 == 0  0.29948    0.15565   1.924    0.533
+7 - 1 == 0  0.35161    0.15428   2.279    0.305
+8 - 1 == 0  0.40169    0.15301   2.625    0.146
+3 - 2 == 0  0.06264    0.15833   0.396    1.000
+4 - 2 == 0  0.12221    0.15649   0.781    0.994
+5 - 2 == 0  0.17905    0.15482   1.157    0.944
+6 - 2 == 0  0.23341    0.15329   1.523    0.795
+7 - 2 == 0  0.28553    0.15190   1.880    0.564
+8 - 2 == 0  0.33562    0.15061   2.228    0.334
+4 - 3 == 0  0.05958    0.15441   0.386    1.000
+5 - 3 == 0  0.11641    0.15271   0.762    0.995
+6 - 3 == 0  0.17077    0.15117   1.130    0.950
+7 - 3 == 0  0.22289    0.14975   1.488    0.813
+8 - 3 == 0  0.27298    0.14844   1.839    0.592
+5 - 4 == 0  0.05683    0.15081   0.377    1.000
+6 - 4 == 0  0.11119    0.14924   0.745    0.996
+7 - 4 == 0  0.16332    0.14780   1.105    0.956
+8 - 4 == 0  0.21340    0.14648   1.457    0.830
+6 - 5 == 0  0.05436    0.14749   0.369    1.000
+7 - 5 == 0  0.10648    0.14603   0.729    0.996
+8 - 5 == 0  0.15657    0.14470   1.082    0.961
+7 - 6 == 0  0.05212    0.14441   0.361    1.000
+8 - 6 == 0  0.10221    0.14306   0.714    0.997
+8 - 7 == 0  0.05009    0.14156   0.354    1.000
+(Adjusted p values reported -- single-step method)
