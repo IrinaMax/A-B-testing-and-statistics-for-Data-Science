@@ -1,5 +1,8 @@
+#This script shows how many methods we can use in R for A/B testing with R Console output.
+# Usually used for determine the best performence of two or more groups/variants based on the company objective.
+# Here is the brief statistical aproach with significant result.
 
-
+# The sanity check is a assamptions of the correct test, where we need pool proportion withing the CI
 > # sanity chek for A/B testing
 > true_p = 0.5
 > t_cont = 15348
@@ -16,12 +19,16 @@
 > pool_p = (t_cont)/(t_exp+t_cont)
 > pool_p
 [1] 0.5005871
+># Since our pool proportion is still within the interval, this does pass sanity check. 
+#Then we don't have to worry about checking further number of cookies by day data.
+
 > #Using R calculate the 95% Confidence Interval of the variant 𝑉1 which has 150 Clicks and 900 Impressions
 > CI<-prop.test(x=150,n=900, correct = FALSE, conf.level = 0.95)
 > CI$conf.int
 [1] 0.1437461 0.1924207
 attr(,"conf.level")
 [1] 0.95
+
 > # Using R test if the actual 𝑝 of the variant 𝑉1 could be considered as 0.17 and then test again for 0.20
 > #Hypothesis Testing for p=0.17
 > t1<-prop.test(x=150,n=900, p=0.17, alternative = c("two.sided"), conf.level = 0.95, correct = FALSE)
