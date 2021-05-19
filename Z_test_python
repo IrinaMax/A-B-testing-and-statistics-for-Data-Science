@@ -1,0 +1,85 @@
+# Z-test on python
+import numpy as np
+from scipy.stats import norm
+
+mu_B = 62
+mu_A = 60
+
+std_B = 45
+std_A = 40
+
+n_B = 4000
+n_A = 6000
+
+Z = (mu_B - mu_A)/np.sqrt(std_B**2/n_B + std_A**2/n_A)
+pvalue = norm.sf(Z)
+
+print("Z-score: {0}\np-value: {1}".format(Z,pvalue))
+
+# visualization of P value
+import matplotlib.pyplot as plt
+
+z = np.arange(-3, 3, 0.1)
+plt.plot(z, norm.pdf(z))
+plt.fill_between(z[z>Z], norm.pdf(z[z>Z]))
+plt.show()
+
+# χ² test for conversion rate. The hypothesis to test are:
+# H₀: “the conversion rate is the same for the two versions”
+# H₁: “the conversion rate is higher for version B”
+
+# The second step is to see how likely our samples are under H₀
+from scipy.stats import chi2
+import numpy as np
+
+T = np.array([102, 68, 5898, 3932])
+O = np.array([90, 80, 5910, 3920])
+
+D = np.sum(np.square(T-O)/T)
+
+pvalue = chi2.sf(D, df=1)
+
+print("distance d: {0}\np-value: {1}".format(D,pvalue))
+
+import matplotlib.pyplot as plt
+
+d = np.arange(0, 5, 0.1)
+plt.plot(d, chi2.pdf(d, df=1))
+plt.fill_between(d[d>D], chi2.pdf(d[d>D], df=1))
+plt.show()
+#There is a pvalue chance that a result at least as distant from the theoretical distribution as our observation would have happened under H₀. 
+#With a common go-to α criterion of 5%, we have pvalue>α and H₀ cannot be rejected.
+
+#Z-test for conversion rate
+#The Z-test could be adapted to conversion rate by modelling conversion as an rv which realisations are in {0,1}:
+# 1 for a conversion
+# 0 else
+
+# The second step is to see how likely our samples are under H₀
+import numpy as np
+from scipy.stats import norm
+
+mu_B = 0.02
+mu_A = 0.015
+
+var_B = mu_B * (1-mu_B)
+var_A = mu_A * (1-mu_A)
+
+n_B = 4000
+n_A = 6000
+
+Z = (mu_B - mu_A)/np.sqrt(var_B/n_B + var_A/n_A)
+pvalue = norm.sf(Z)
+print("Z-score: {0}\np-value: {1}".format(Z,pvalue))
+
+import matplotlib.pyplot as plt
+z = np.arange(-3, 3, 0.1)
+plt.plot(z, norm.pdf(z))
+plt.fill_between(z[z>Z], norm.pdf(z[z>Z]))
+plt.show()
+
+# do not forget that A/B testing still relies on a model of truth: as we have seen, there are different possible models.
+# **time of the year/month/week, the weather, the economic context can affect the nature of your audience
+# **even if after two days of A/B testing your results are significant, they may not be over the course of a week
+
+
