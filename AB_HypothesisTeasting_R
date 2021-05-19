@@ -22,14 +22,15 @@
 ># Since our pool proportion is still within the interval, this does pass sanity check. 
 #Then we don't have to worry about checking further number of cookies by day data.
 
-> #Using R calculate the 95% Confidence Interval of the variant 𝑉1 which has 150 Clicks and 900 Impressions
+> #calculate the 95% Confidence Interval of the variant 𝑉1 which has 150 Clicks and 900 Impressions
 > CI<-prop.test(x=150,n=900, correct = FALSE, conf.level = 0.95)
 > CI$conf.int
 [1] 0.1437461 0.1924207
 attr(,"conf.level")
 [1] 0.95
 
-> # Using R test if the actual 𝑝 of the variant 𝑉1 could be considered as 0.17 and then test again for 0.20
+>#Hypothesis Testing of One Variant---------------------------------
+> # test if the actual 𝑝 of the variant 𝑉1 could be considered as 0.17 and then test again for 0.20
 > #Hypothesis Testing for p=0.17
 > t1<-prop.test(x=150,n=900, p=0.17, alternative = c("two.sided"), conf.level = 0.95, correct = FALSE)
 > t1
@@ -45,7 +46,7 @@ sample estimates:
         p 
 0.1666667 
 
-> #Hypothesis Testing for p=0.20
+> #Hypothesis Testing for p=0.20  Let test again with probability of 0.20
 > t2<-prop.test(x=150,n=900, p=0.20, correct = FALSE)
 > t2
 
@@ -61,7 +62,8 @@ sample estimates:
 0.1666667 
 
 > #Hypothesis Testing of Two Variants (AB Testing)
-> # Using R calculate compare the variant 𝑉1 which has 120 Clicks and 800 Impressions with variant 𝑉2 which has 100 Clicks and 700 Impressions
+>#Z-test of proportions when we want to compare two variants about their Response Rates. 
+> #  compare the variant 𝑉1 which has 120 Clicks and 800 Impressions with variant 𝑉2 which has 100 Clicks and 700 Impressions
 > # define a vector of the responses
 > x<-c(120,100)
 > # define a vector of the impressions
