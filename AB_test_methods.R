@@ -1,4 +1,4 @@
-#This script shows how many methods we can use in R for A/B testing
+#This script shows few most of interesting methods we can use in R for A/B testing
 
 # The sanity check is a assamptions of the correct test, where we need pool proportion withing the CI
 #sanity check for A/B testing
