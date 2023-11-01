@@ -33,7 +33,7 @@ pool_p
 CI<-prop.test(x=150,n=900, correct = FALSE, conf.level = 0.95)
 CI$conf.int
 # Using R test if the actual 𝑝 of the variant 𝑉1 could be considered as 0.17 and then test again for 0.20
-#Hypothesis Testing for p=0.17
+#Hypothesis Testing for p=0.17. Power of proportion
 t1<-prop.test(x=150,n=900, p=0.17, alternative = c("two.sided"), conf.level = 0.95, correct = FALSE)
 t1
 #Hypothesis Testing for p=0.20
