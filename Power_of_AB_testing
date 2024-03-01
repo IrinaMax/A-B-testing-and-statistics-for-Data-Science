@@ -1,6 +1,6 @@
 #Power: The probability of rejecting the null hypothesis when it is false. You want to design your experiment to have a power near 1.
 #Significance: The probability of failing to reject the null hypothesis when it is true. You want to design your experiment so you have significance or p-values near zero.
-#Adapted from “The Cambridge Dictionary of Statistics”, B.S. Everitt, 2nd Edition, Cambridge, 2005 printing.
+#Adapted from “The Cambridge Dictionary of Statistics”, B.S. Everitt, 2nd Edition, Cambridge.
 
 library(gtools)
 library(ggplot2)
