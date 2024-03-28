@@ -1,1 +1,6 @@
-This files are some lttle chuns of my work and presentation on the Experimentation AdPlatform to determin size for experiments and conducting A/B testing
+## These files contain chunks of my work and pictures for presentation on the Experimentation AdPlatform, focusing on determining experiment size and conducting A/B testing.
+
+
+
+
+
