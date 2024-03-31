@@ -60,6 +60,7 @@ with high power and significance, you need to consider several key factors:
 1. Sample Size:
 
 Increasing the sample size generally increases the power of your experiment. A larger sample size reduces the variability in your data and increases your ability to detect true effects.
+![Power_vsSampleSizeRPO.png]
 2. Effect Size:
 
 A larger effect size also increases the power of your experiment. Effect size refers to the magnitude of the difference or relationship between variables you are investigating. Larger effects are easier to detect with smaller sample sizes.
