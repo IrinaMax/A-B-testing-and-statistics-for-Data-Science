@@ -1,4 +1,6 @@
 # My best practice to Conduct Experimental Research and Design Experiments
+![A_B test1](https://github.com/IrinaMax/A-B-testing-and-statistics-for-Data-Science/assets/16123495/ab9e03b2-51dc-4a7e-9ba9-6ea7664b4407)
+
 Conducting experimental research requires careful planning, execution, and analysis to ensure the validity and reliability of my findings. 
 Here are my best practices to follow:
 
@@ -64,6 +66,7 @@ Increasing the sample size generally increases the power of your experiment. A l
 ![Chi Squared power calculations](https://github.com/IrinaMax/A-B-testing-and-statistics-for-Data-Science/assets/16123495/5fdd7a82-026b-4748-bd15-8ea723bd94e1)
 
 #### 2. Effect Size:
+![Power change vs Sample size base on RPO Cohens_d](https://github.com/IrinaMax/A-B-testing-and-statistics-for-Data-Science/assets/16123495/fe00ebea-5082-4494-a3d2-46eeac60a575)
 
 A larger effect size also increases the power of your experiment. Effect size refers to the magnitude of the difference or relationship between variables you are investigating. Larger effects are easier to detect with smaller sample sizes.
 #### 3. Significance Level (Alpha):
