@@ -1,4 +1,4 @@
-## Conduct Experimental Research and Design Experiments
+## My best practice to Conduct Experimental Research and Design Experiments
 
 ### 1. Identify the Research Question:
 
@@ -44,6 +44,46 @@ Reflect on your experiment and consider any limitations or weaknesses in your de
 Think about how you could improve your experiment in future research studies.
 Remember, experimental research requires careful planning and attention to detail to ensure that your findings are valid and reliable.
 
+# Power: The probability of rejecting the null hypothesis when it is false. You want to design your experiment to have a power near 1.
+In other words, it represents the ability of your experiment to detect a true effect or difference if one exists. Ideally, you want to design your experiment to have a power close to 1, indicating a high likelihood of correctly rejecting the null hypothesis when it is false.
+
+# Significance: ## The probability of failing to reject the null hypothesis when it is true. You want to design your experiment so you have significance or p-values near zero."
+Significance, in the context of hypothesis testing, refers to the probability of obtaining a result as extreme as the one observed, or more extreme, assuming that the null hypothesis is true. It is often represented by p-values, where lower values indicate stronger evidence against the null hypothesis. You want to design your experiment so that you have significance or p-values close to zero, indicating a low probability of observing the results if the null hypothesis is true.
+
+## To design an experiment 
+with high power and significance, you need to consider several key factors:
+
+1. Sample Size:
+
+Increasing the sample size generally increases the power of your experiment. A larger sample size reduces the variability in your data and increases your ability to detect true effects.
+2. Effect Size:
+
+A larger effect size also increases the power of your experiment. Effect size refers to the magnitude of the difference or relationship between variables you are investigating. Larger effects are easier to detect with smaller sample sizes.
+3. Significance Level (Alpha):
+
+Choose an appropriate significance level (alpha), typically set at 0.05. This is the threshold for determining statistical significance. A lower alpha value increases the likelihood of finding significant results when the null hypothesis is false.
+4. Statistical Test:
+
+Select a statistical test that is appropriate for your research design and hypothesis. Different tests have different levels of power for detecting certain types of effects.
+5. Control for Confounding Variables:
+
+Ensure that your experimental design controls for confounding variables that could obscure the relationship between your independent and dependent variables. This increases the internal validity of your experiment.
+6. Randomization:
+
+Randomize the assignment of participants to experimental conditions to reduce the impact of potential biases and increase the generalizability of your findings.
+7. Replication:
+
+Consider conducting multiple replications of your experiment to increase the reliability of your results. Replication helps confirm the robustness of your findings across different samples or conditions.
+8. Power Analysis:
+
+Conduct a power analysis during the experimental design phase to estimate the required sample size needed to achieve a desired level of power. This analysis helps you plan your experiment effectively.
+9. Sensitivity Analysis:
+
+Perform sensitivity analyses to assess how variations in effect size, sample size, or other factors impact the power and significance of your results. This helps you understand the robustness of your findings under different scenarios.
+10. Pre-registration:
+
+Consider pre-registering your experimental design and analysis plan to enhance transparency and reduce the risk of bias in interpreting the results.
+By carefully considering these factors and designing your experiment accordingly, you can maximize both the power and significance of your research findings.
 
 
 
