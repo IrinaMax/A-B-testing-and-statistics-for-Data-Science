@@ -58,8 +58,10 @@ Significance, in the context of hypothesis testing, refers to the probability of
 with high power and significance, you need to consider several key factors:
 
 #### 1. Sample Size:
+![Anova_pwr](https://github.com/IrinaMax/A-B-testing-and-statistics-for-Data-Science/assets/16123495/ba61d946-8f02-4666-ad24-2989023f4a0b)
 
 Increasing the sample size generally increases the power of your experiment. A larger sample size reduces the variability in your data and increases your ability to detect true effects.
+![Chi Squared power calculations](https://github.com/IrinaMax/A-B-testing-and-statistics-for-Data-Science/assets/16123495/5fdd7a82-026b-4748-bd15-8ea723bd94e1)
 
 #### 2. Effect Size:
 
