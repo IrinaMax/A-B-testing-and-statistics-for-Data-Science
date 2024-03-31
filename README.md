@@ -57,35 +57,35 @@ Significance, in the context of hypothesis testing, refers to the probability of
 ## To design an experiment 
 with high power and significance, you need to consider several key factors:
 
-1. Sample Size:
+#### 1. Sample Size:
 
 Increasing the sample size generally increases the power of your experiment. A larger sample size reduces the variability in your data and increases your ability to detect true effects.
-![Power_vsSampleSizeRPO.png]
-2. Effect Size:
+
+#### 2. Effect Size:
 
 A larger effect size also increases the power of your experiment. Effect size refers to the magnitude of the difference or relationship between variables you are investigating. Larger effects are easier to detect with smaller sample sizes.
-3. Significance Level (Alpha):
+#### 3. Significance Level (Alpha):
 
 Choose an appropriate significance level (alpha), typically set at 0.05. This is the threshold for determining statistical significance. A lower alpha value increases the likelihood of finding significant results when the null hypothesis is false.
-4. Statistical Test:
+#### 4. Statistical Test:
 
 Select a statistical test that is appropriate for your research design and hypothesis. Different tests have different levels of power for detecting certain types of effects.
-5. Control for Confounding Variables:
+#### 5. Control for Confounding Variables:
 
 Ensure that your experimental design controls for confounding variables that could obscure the relationship between your independent and dependent variables. This increases the internal validity of your experiment.
-6. Randomization:
+#### 6. Randomization:
 
 Randomize the assignment of participants to experimental conditions to reduce the impact of potential biases and increase the generalizability of your findings.
-7. Replication:
+#### 7. Replication:
 
 Consider conducting multiple replications of your experiment to increase the reliability of your results. Replication helps confirm the robustness of your findings across different samples or conditions.
-8. Power Analysis:
+#### 8. Power Analysis:
 
 Conduct a power analysis during the experimental design phase to estimate the required sample size needed to achieve a desired level of power. This analysis helps you plan your experiment effectively.
-9. Sensitivity Analysis:
+#### 9. Sensitivity Analysis:
 
 Perform sensitivity analyses to assess how variations in effect size, sample size, or other factors impact the power and significance of your results. This helps you understand the robustness of your findings under different scenarios.
-10. Pre-registration:
+#### 10. Pre-registration:
 
 Consider pre-registering your experimental design and analysis plan to enhance transparency and reduce the risk of bias in interpreting the results.
 By carefully considering these factors and designing your experiment accordingly, you can maximize both the power and significance of your research findings.
