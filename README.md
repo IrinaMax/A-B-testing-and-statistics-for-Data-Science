@@ -24,11 +24,14 @@ Consider ethical considerations and ensure that your experiment is conducted in 
 
 Determine the characteristics of the participants you need for your experiment (e.g., age, gender or othe variable base on KPI).
 Use random sampling techniques if possible to ensure that your sample is representative of the population you are interested in studying.
+
 ### 6. Conduct the Experiment:
 
 Carry out the procedures you have designed for your experiment.
 Ensure that all conditions are administered consistently across participants.
-Collect data using appropriate methods (e.g., surveys, observations...).
+Collect data using appropriate methods (e.g., surveys, observations...). 
+Randomization is important in an experimental research because it ensures unbiased results of the experiment. It also measures the cause-effect relationship on a particular group of interest.
+
 ### 7. Analyze the Data:
 
 Use statistical techniques to analyze the data you have collected.
