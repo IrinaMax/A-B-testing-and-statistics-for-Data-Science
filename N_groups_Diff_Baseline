@@ -83,4 +83,126 @@ Residuals   196 17806.1    90.8
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
+Example 2 =================================
+How to test for significance if groups differed at baseline?
+What kind of statistical significance test can I do to rectify this situation?
+
+Example data:
+
+TREATED (received marketing, measured product ownership before and after test was conducted)
+
+N = 150,000
+% that own product before marketing = 55.0%
+% that own the product after marketing = 57.5%
+CONTROL (did not receive marketing, but we measured product ownership before and after the test was conducted as well)
+
+N = 50,000
+% that own product before = 53.2% *(statistically different than TREATED's 55%)
+% that own the product after = 56.2%
+
+To test for the significance of differences between groups when they differed at baseline, also can be used an analysis of covariance (ANCOVA). 
+ANCOVA is an extension of analysis of variance (ANOVA) that allows you to compare group means while controlling for the effects of covariates.
+
+In this case, the covariate is the baseline measure of product ownership. By including the baseline measure as a covariate in the analysis, you can adjust for any initial differences between the treated and control groups.
+
+Perform an ANCOVA analysis in 3 steps:
+
+1. Calculate the change in product ownership for each group:
+TREATED: 57.5% - 55.0% = 2.5%
+CONTROL: 56.2% - 53.2% = 3.0%
+
+2. Perform ANCOVA analysis:
+Use the change in product ownership as the dependent variable.
+Use group membership (TREATED vs. CONTROL) as the independent variable.
+Include the baseline measure of product ownership as a covariate.
+
+3. Interpret the results:
+The ANCOVA analysis will provide p-values for the main effect of group (TREATED vs. CONTROL) and the covariate (baseline product ownership).
+A significant main effect of group indicates that there is a difference in the change in product ownership between the treated and control groups, after adjusting for baseline differences.
+A significant main effect of the covariate indicates that baseline product ownership has an effect on the change in product ownership, independent of group membership.
+By including the baseline measure as a covariate in the analysis, you can more accurately assess the effect of the treatment (marketing) on product ownership while controlling for any initial differences between the groups.
+
+Keep in mind that ANCOVA assumes that the relationship between the covariate and the dependent variable is linear and that there is homogeneity of regression slopes across groups. 
+Additionally, be cautious of potential confounding variables that may affect the results of the analysis.
+
+
+# Example data generation=============================
+treated_before <- 55.0
+treated_after <- 57.5
+control_before <- 53.2
+control_after <- 56.2
+
+# Calculate change in product ownership
+treated_change <- treated_after - treated_before
+control_change <- control_after - control_before
+
+# Create data frame
+data <- data.frame(
+  Group = c("TREATED", "CONTROL"),
+  Before = c(treated_before, control_before),
+  After = c(treated_after, control_after),
+  Change = c(treated_change, control_change)
+)
+data %>% head
+
+#    Group Before After Change
+#1 TREATED   55.0  57.5    2.5
+#2 CONTROL   53.2  56.2    3.0
+
+
+# Perform ANCOVA analysis
+result <- lm(Change ~ Group + Baseline, data = data)
+
+# Summarize results
+summary(result)
+
+Call:
+lm(formula = Change ~ Group + Baseline, data = data)
+
+Residuals:
+ALL 2 residuals are 0: no residual degrees of freedom!
+
+Coefficients: (1 not defined because of singularities)
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept)       3.0        NaN     NaN      NaN
+GroupTREATED     -0.5        NaN     NaN      NaN
+Baseline           NA         NA      NA       NA
+
+Residual standard error: NaN on 0 degrees of freedom
+Multiple R-squared:      1,	Adjusted R-squared:    NaN 
+F-statistic:   NaN on 1 and 0 DF,  p-value: NA
+
+
+# Plot the change in product ownership by group
+library(ggplot2)
+library(dplyr)
+
+# Plot the change in product ownership by group
+ggplot(data, aes(x = Group, y = Change, fill = Group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Group", y = "Change in Product Ownership", fill = "Group") +
+  ggtitle("Change in Product Ownership by Group") +
+  theme_minimal()
+
+# Plot barplot with facets
+
+data_long <- data %>%
+  pivot_longer(cols = c(Before, After),
+               names_to = "Time",
+               values_to = "Ownership")
+ggplot(data_long, aes(x = Time, y = Ownership, fill = Group)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_grid(~Group) +
+  labs(x = "Time", y = "Product Ownership", fill = "Group") +
+  ggtitle("Product Ownership Before and After") +
+  geom_text(aes(label = sprintf("%.1f", Ownership)), position = position_dodge(width = 1), vjust = -0.5, size = 3) +
+  theme_minimal()
+
+# Plot boxplots before and after
+ggplot(data_long, aes(x = Time, y = Ownership, fill = Group)) +
+  geom_boxplot() +
+  facet_grid(~Group) +
+  labs(x = "Time", y = "Product Ownership", fill = "Group") +
+  ggtitle("Boxplots of Product Ownership Before and After") +
+  theme_minimal()
 
