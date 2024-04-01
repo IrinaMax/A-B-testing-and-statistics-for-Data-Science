@@ -1,0 +1,85 @@
+# Example for my students
+# Comparing the blood pressure of men and women before and after exercise over the course of one week, you would likely use a repeated measures design with a factorial structure. 
+# This design would allow you to examine the effects of both gender and time (before vs. after exercise) on blood pressure.
+
+Here's how you could structure your study:
+
+Factor 1: Gender
+
+Group 1: Men
+Group 2: Women
+Factor 2: Time
+
+Time 1: Before exercise
+Time 2: After exercise (measured repeatedly over the course of one week)
+
+Each participant (both men and women) would have their blood pressure measured at two different times: before exercise and after exercise, with measurements taken repeatedly over the course of one week.
+
+To analyze the data, you could use a repeated measures ANOVA (Analysis of Variance) or a linear mixed-effects model to assess the main effects of gender and time, as well as any interactions between the two factors, on blood pressure. 
+This approach would allow you to determine whether there are significant differences in blood pressure between men and women, as well as whether blood pressure changes significantly before and after exercise within each gender group, 
+and whether these changes differ between men and women.
+
+In summary:
+
+Repeated measures design: Allows for the examination of within-subject changes over time, such as blood pressure before and after exercise.
+Factorial structure: Enables the simultaneous examination of multiple factors (gender and time) and their interactions on the outcome variable (blood pressure).
+Statistical analysis: Typically involves repeated measures ANOVA or linear mixed-effects modeling to assess main effects and interactions.
+
+# Load necessary libraries
+library(tidyverse)
+library(nlme)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Simulate data for blood pressure measurements
+n <- 200  # Total number of samples
+gender <- sample(c("Male", "Female"), n, replace = TRUE)  # Simulate gender data
+time <- rep(c("Before", "After"), each = n/2)  # Simulate time data (before and after exercise)
+blood_pressure <- rnorm(n, mean = ifelse(gender == "Male", 120, 110), sd = 10)  # Simulate blood pressure data
+
+# Create data frame
+df <- data.frame(Gender = factor(gender, levels = c("Male", "Female")),
+                 Time = factor(time, levels = c("Before", "After")),
+                 Blood_Pressure = blood_pressure)
+head(df)
+  Gender   Time Blood_Pressure
+1   Male Before       112.8959
+2   Male Before       122.5688
+3   Male Before       117.5331
+4 Female Before       106.5246
+5   Male Before       110.4838
+6 Female Before       109.5497
+
+# Visualize the data (boxplot)
+ggplot(df, aes(x = Time, y = Blood_Pressure, fill = Gender)) +
+  geom_boxplot() +
+  labs(x = "Time", y = "Blood Pressure", fill = "Gender", title = "Boxplot of Blood Pressure Before and After Exercise") +
+  theme_minimal()
+
+# Visualize the data (facetted boxplot)
+ggplot(df, aes(x = Time, y = Blood_Pressure, fill = Gender)) +
+  geom_boxplot() +
+  labs(x = "Time", y = "Blood Pressure", fill = "Gender", title = "Boxplot of Blood Pressure Before and After Exercise") +
+  facet_wrap(~ Gender) +
+  theme_minimal()
+
+# Print the ANOVA results
+print(anova_result)
+# Perform repeated measures ANOVA
+anova_result <- anova(aov(Blood_Pressure ~ Gender * Time , data = df))
+
+# Print the ANOVA results
+print(anova_result)
+Analysis of Variance Table
+
+Response: Blood_Pressure
+             Df  Sum Sq Mean Sq F value    Pr(>F)    
+Gender        1  6668.2  6668.2 73.4000 3.119e-15 ***
+Time          1   304.1   304.1  3.3469   0.06885 .  
+Gender:Time   1   218.8   218.8  2.4087   0.12227    
+Residuals   196 17806.1    90.8                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
