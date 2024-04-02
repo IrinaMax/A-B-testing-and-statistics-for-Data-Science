@@ -2,7 +2,7 @@
 ![A_B test1](https://github.com/IrinaMax/A-B-testing-and-statistics-for-Data-Science/assets/16123495/ab9e03b2-51dc-4a7e-9ba9-6ea7664b4407)
 
 Conducting experimental research requires careful planning, execution, and analysis to ensure the validity and reliability of my findings. 
-Here are my best practices to follow:
+Here are my best practices in a steps:
 
 ### 1. Identify the Research Question:
 
