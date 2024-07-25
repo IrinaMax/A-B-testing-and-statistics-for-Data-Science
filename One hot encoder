@@ -1,0 +1,22 @@
+One Hote encored in R
+d <- factor(1:10)
+
+height <- round(175 + rnorm(10)*10)
+
+nationality <- c("AUS","UK","NZ","NZ","AUS","UK","NZ","UK","NZ","NZ")
+
+mydata <- data.frame(cbind(id,height,nationality))
+
+One hot encoding is a representation of categorical variables as binary vectors.  What this means is that we want to 
+
+transform a categorical variable or variables to a format that works better with classification and regression algorithms.
+We also sometimes call these dummy variables.
+We want to create new columns, one for each nationality. Each new column will have a 1 or a 0 to show whether each person is from that country or not.  While there are packages in R designed to do 
+this ('dummies' for example) - one way to do this in base R, is using a loop.
+
+for(unique_value in unique(mydata$nationality)){
+ 
+
+mydata[paste("nationality", unique_value, sep = ".")] <- ifelse(mydata$nationality == unique_value, 1, 0)
+
+}
